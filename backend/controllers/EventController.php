@@ -148,10 +148,6 @@ class EventController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->status == Event::STATUS_CONFIRMED) {
-            throw new NotFoundHttpException('ERROR: STATUS_CONFIRMED');
-        }
-
         $client = new Client();
 
         $response = $client->createRequest()
@@ -167,7 +163,7 @@ class EventController extends Controller
         }
 
         if($model->save()) {
-            return $this->redirect(['index']);
+            return $this->goHome();
         } else {
             throw new NotFoundHttpException('ERROR: SAVE_EVENT');
         }

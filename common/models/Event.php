@@ -48,8 +48,8 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['goal', 'cost', 'endpoint'], 'required'],
-            [['cost'], 'integer'],
-            [['goal', 'endpoint', 'status'], 'string', 'max' => 255],
+            [['cost', 'endpoint'], 'integer'],
+            [['goal', 'status'], 'string', 'max' => 255],
             ['status', 'default', 'value' => self::STATUS_NEW],
             ['status', 'in', 'range' => [self::STATUS_NEW, self::STATUS_CONFIRMED, self::STATUS_REJECTED]],
             ['endpoint', 'in', 'range' => ArrayHelper::map(Endpoint::find()->select(['id'])->asArray()->all(), 'id', 'id')],
