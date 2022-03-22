@@ -18,7 +18,11 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parameters')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_call')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'goal_call')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'cost_call')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

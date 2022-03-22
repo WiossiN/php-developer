@@ -87,4 +87,26 @@ class Event extends \yii\db\ActiveRecord
     {
         return self::getStatusOptions()[$this->status];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEndpoints()
+    {
+        return $this->hasOne(Endpoint::className(), ['id' => 'endpoint']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getParamsArray()
+    {
+        $array = [];
+        
+        if ($this->endpoints->id_call !== Null && $this->endpoints->id_call !== '') $array[$this->endpoints->id_call] = $this->id;
+        if ($this->endpoints->goal_call !== Null && $this->endpoints->goal_call !== '') $array[$this->endpoints->goal_call] = $this->goal;
+        if ($this->endpoints->cost_call !== Null && $this->endpoints->cost_call !== '') $array[$this->endpoints->cost_call] = $this->cost;
+
+        return $array;
+    }
 }

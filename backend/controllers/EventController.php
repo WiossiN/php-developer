@@ -8,6 +8,7 @@ use common\models\search\EventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\httpclient\Client;
 
 /**
  * EventController implements the CRUD actions for Event model.
@@ -123,5 +124,38 @@ class EventController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Send request to endpoint.
+     * @param int $id ID
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionSending($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->status == Event::STATUS_CONFIRMED) {
+            return 'ERROR: STATUS_CONFIRMED';
+        }
+
+        $client = new Client();
+
+        $response = $client->createRequest()
+            ->setMethod($model->endpoints->type)
+            ->setUrl($model->endpoints->endpoint)
+            ->setData($model->getParamsArray())
+            ->send();
+
+        if ($response->isOk) {
+            $model->status = Event::STATUS_CONFIRMED;
+        } else {
+            $model->status = Event::STATUS_REJECTED;
+        }
+
+        $model->save();
+
+        return $this->redirect(['index']);
     }
 }

@@ -22,7 +22,9 @@ class m220322_112745_create_endpoint_table extends Migration
             'name' => $this->string()->notNull(),
             'endpoint' => $this->string()->notNull(),
             'type' => $this->string()->notNull(),
-            'parameters' => $this->string()->notNull(),
+            'id_call' => $this->string(),
+            'goal_call' => $this->string(),
+            'cost_call' => $this->string(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);

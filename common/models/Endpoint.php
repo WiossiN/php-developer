@@ -12,7 +12,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $name
  * @property string $endpoint
  * @property string $type
- * @property string $parameters
+ * @property string $id_call
+ * @property string $goal_call
+ * @property string $cost_call
  * @property int $created_at
  * @property int $updated_at
  */
@@ -45,9 +47,9 @@ class Endpoint extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'endpoint', 'type', 'parameters'], 'required'],
+            [['name', 'endpoint', 'type'], 'required'],
             [['created_at', 'updated_at'], 'integer'],
-            [['name', 'endpoint', 'type', 'parameters'], 'string', 'max' => 255],
+            [['name', 'endpoint', 'type', 'id_call', 'goal_call', 'cost_call'], 'string', 'max' => 255],
             ['type', 'in', 'range' => [self::TYPE_GET, self::TYPE_POST]],
         ];
     }
@@ -62,7 +64,9 @@ class Endpoint extends \yii\db\ActiveRecord
             'name' => 'Name',
             'endpoint' => 'Endpoint',
             'type' => 'Type',
-            'parameters' => 'Parameters',
+            'id_call' => 'ID Call',
+            'goal_call' => 'Goal Call',
+            'cost_call' => 'Cost Call',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -85,5 +89,13 @@ class Endpoint extends \yii\db\ActiveRecord
     public function getTypeName()
     {
         return self::getTypeOptions()[$this->type];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEvents()
+    {
+        return $this->hasMany(Event::className(), ['endpoint' => 'id']);
     }
 }

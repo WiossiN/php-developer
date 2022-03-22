@@ -18,7 +18,7 @@ class EndpointSearch extends Endpoint
     {
         return [
             [['id'], 'integer'],
-            [['name', 'endpoint', 'type', 'parameters'], 'safe'],
+            [['name', 'endpoint', 'type'], 'safe'],
         ];
     }
 
@@ -63,8 +63,7 @@ class EndpointSearch extends Endpoint
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'endpoint', $this->endpoint])
-            ->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'parameters', $this->parameters]);
+            ->andFilterWhere(['like', 'type', $this->type]);
 
         return $dataProvider;
     }

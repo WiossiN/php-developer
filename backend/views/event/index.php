@@ -44,8 +44,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             'created_at:datetime',
                             'updated_at:datetime',
-
-                            ['class' => 'hail812\adminlte3\yii\grid\ActionColumn'],
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{sending}<br>{view} {update} {delete}',
+                                'buttons' => [
+                                    'sending' => function ($url, $data) {
+                                        if ($data->status !== 'confirmed')
+                                            return Html::a('Подтвердить', $url);
+                                    },
+                                ],
+                            ],
                         ],
                         'summaryOptions' => ['class' => 'summary mb-2'],
                         'pager' => [
