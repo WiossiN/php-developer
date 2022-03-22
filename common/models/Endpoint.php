@@ -84,6 +84,6 @@ class Endpoint extends \yii\db\ActiveRecord
      */
     public function getTypeName()
     {
-        return self::getTypeOptions()[$this->status];
+        return self::getTypeOptions()[$this->type];
     }
 }
