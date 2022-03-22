@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "event".
@@ -51,6 +52,7 @@ class Event extends \yii\db\ActiveRecord
             [['goal', 'endpoint', 'status'], 'string', 'max' => 255],
             ['status', 'default', 'value' => self::STATUS_NEW],
             ['status', 'in', 'range' => [self::STATUS_NEW, self::STATUS_CONFIRMED, self::STATUS_REJECTED]],
+            ['endpoint', 'in', 'range' => ArrayHelper::map(Endpoint::find()->select(['id'])->asArray()->all(), 'id', 'id')],
         ];
     }
 

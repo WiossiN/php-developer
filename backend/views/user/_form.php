@@ -23,7 +23,7 @@ use common\models\User;
 
     <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) ?>
 
-    <?=  $form->field($model, 'status')->dropDownList(User::getStatusOptions()) ?>
+    <?= $form->field($model, 'status')->dropDownList(User::getStatusOptions()) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

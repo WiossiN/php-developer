@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use common\models\Endpoint;
 use common\models\Event;
 use common\models\search\EventSearch;
 use yii\web\Controller;
