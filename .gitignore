@@ -13,6 +13,7 @@ nbproject
 .buildpath
 .project
 .settings
+.history
 
 # windows thumbnail cache
 Thumbs.db
