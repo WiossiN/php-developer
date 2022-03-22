@@ -18,7 +18,6 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii']],
                     ['label' => 'Пользователи',  'icon' => 'user', 'url' => ['/user']],
                     ['label' => 'События', 'icon' => 'rocket', 'url' => ['/event']],
                     ['label' => 'Поставщики', 'icon' => 'building', 'url' => ['/endpoint']],
