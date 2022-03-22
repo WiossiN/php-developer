@@ -27,7 +27,7 @@ class EventController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'sending'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'sending'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
