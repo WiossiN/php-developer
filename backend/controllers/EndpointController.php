@@ -8,6 +8,7 @@ use common\models\search\EndpointSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * EndpointController implements the CRUD actions for Endpoint model.
