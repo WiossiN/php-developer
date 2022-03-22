@@ -23,6 +23,16 @@ class EventController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'sending'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
@@ -139,7 +149,7 @@ class EventController extends Controller
         $model = $this->findModel($id);
 
         if ($model->status == Event::STATUS_CONFIRMED) {
-            return 'ERROR: STATUS_CONFIRMED';
+            throw new NotFoundHttpException('ERROR: STATUS_CONFIRMED');
         }
 
         $client = new Client();
@@ -156,8 +166,10 @@ class EventController extends Controller
             $model->status = Event::STATUS_REJECTED;
         }
 
-        $model->save();
-
-        return $this->redirect(['index']);
+        if($model->save()) {
+            return $this->redirect(['index']);
+        } else {
+            throw new NotFoundHttpException('ERROR: SAVE_EVENT');
+        }
     }
 }
