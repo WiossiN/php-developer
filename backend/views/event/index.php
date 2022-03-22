@@ -3,13 +3,11 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use common\models\User;
-
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\UserSearch */
+/* @var $searchModel common\models\search\EventSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Events';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid">
@@ -19,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('Create Event', ['create'], ['class' => 'btn btn-success']) ?>
                         </div>
                     </div>
 
@@ -32,14 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filterModel' => $searchModel,
                         'columns' => [
                             'id',
-                            'email:email',
-                            [
-                                'attribute' => 'status',
-                                'filter' => User::getStatusOptions(),
-                                'content' => function ($data) {
-                                    return $data->getStatusName();
-                                },
-                            ],
+                            'goal',
+                            'cost',
+                            'endpoint',
+                            'status',
                             'created_at:datetime',
                             'updated_at:datetime',
 

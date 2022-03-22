@@ -10,7 +10,7 @@
                 <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block"><?= Yii::$app->user->getIdentity()->email ?></a>
             </div>
         </div>
 
@@ -18,9 +18,9 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Пользователи',  'icon' => 'user', 'url' => ['/user'], 'target' => '_blank'],
-                    ['label' => 'События', 'icon' => 'required', 'url' => ['/required'], 'target' => '_blank'],
+                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii']],
+                    ['label' => 'Пользователи',  'icon' => 'user', 'url' => ['/user']],
+                    ['label' => 'События', 'icon' => 'events', 'url' => ['/event']],
                 ],
             ]);
             ?>

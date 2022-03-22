@@ -28,7 +28,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-
     /**
      * {@inheritdoc}
      */
@@ -208,5 +207,25 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * @return array status
+     */
+    public static function getStatusOptions()
+    {
+        return [
+            self::STATUS_DELETED => 'Удалён',
+            self::STATUS_INACTIVE => 'Не активен',
+            self::STATUS_ACTIVE => 'Активен',
+        ];
+    }
+
+    /**
+     * @return string status
+     */
+    public function getStatusName()
+    {
+        return self::getStatusOptions()[$this->status];
     }
 }
