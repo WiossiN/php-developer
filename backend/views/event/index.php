@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'buttons' => [
                                     'sending' => function ($url, $data) {
                                         if ($data->status !== 'confirmed')
-                                            return Html::a('Подтвердить', $url);
+                                            return Html::a('Подтвердить', $url, ['data-method' => 'POST']);
                                     },
                                 ],
                             ],

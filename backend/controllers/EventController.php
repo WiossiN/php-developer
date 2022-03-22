@@ -146,26 +146,35 @@ class EventController extends Controller
      */
     public function actionSending($id)
     {
-        $model = $this->findModel($id);
+        $request = Yii::$app->request;
+        if ($request->isPost) {
+            $model = $this->findModel($id);
 
-        $client = new Client();
-
-        $response = $client->createRequest()
-            ->setMethod($model->endpoints->type)
-            ->setUrl($model->endpoints->endpoint)
-            ->setData($model->getParamsArray())
-            ->send();
-
-        if ($response->isOk) {
-            $model->status = Event::STATUS_CONFIRMED;
+            if ($model->status == Event::STATUS_CONFIRMED) {
+                throw new NotFoundHttpException('ERROR: STATUS_CONFIRMED');
+            }
+    
+            $client = new Client();
+    
+            $response = $client->createRequest()
+                ->setMethod($model->endpoints->type)
+                ->setUrl($model->endpoints->endpoint)
+                ->setData($model->getParamsArray())
+                ->send();
+    
+            if ($response->isOk) {
+                $model->status = Event::STATUS_CONFIRMED;
+            } else {
+                $model->status = Event::STATUS_REJECTED;
+            }
+    
+            if($model->save()) {
+                return $this->redirect(['event/index']);
+            } else {
+                throw new NotFoundHttpException('ERROR: SAVE_EVENT');
+            }
         } else {
-            $model->status = Event::STATUS_REJECTED;
-        }
-
-        if($model->save()) {
-            return $this->goHome();
-        } else {
-            throw new NotFoundHttpException('ERROR: SAVE_EVENT');
+            throw new NotFoundHttpException('Method not POST');
         }
     }
 }
