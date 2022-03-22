@@ -21,7 +21,7 @@ class m220322_112746_create_event_table extends Migration
             'id' => $this->primaryKey(),
             'goal' => $this->string()->notNull(),
             'cost' => $this->integer()->notNull(),
-            'endpoint' => $this->integer()->notNull(),
+            'endpoint' => $this->integer(),
             'status' => $this->string()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
