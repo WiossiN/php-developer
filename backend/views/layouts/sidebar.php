@@ -20,7 +20,8 @@
                 'items' => [
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii']],
                     ['label' => 'Пользователи',  'icon' => 'user', 'url' => ['/user']],
-                    ['label' => 'События', 'icon' => 'events', 'url' => ['/event']],
+                    ['label' => 'События', 'icon' => 'rocket', 'url' => ['/event']],
+                    ['label' => 'Поставщики', 'icon' => 'web', 'url' => ['/endpoint']],
                 ],
             ]);
             ?>

@@ -46,7 +46,7 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['goal', 'cost', 'endpoint', 'status'], 'required'],
+            [['goal', 'cost', 'endpoint'], 'required'],
             [['cost'], 'integer'],
             [['goal', 'endpoint', 'status'], 'string', 'max' => 255],
             ['status', 'default', 'value' => self::STATUS_NEW],
@@ -66,5 +66,25 @@ class Event extends \yii\db\ActiveRecord
             'endpoint' => 'Endpoint',
             'status' => 'Status',
         ];
+    }
+
+    /**
+     * @return array status
+     */
+    public static function getStatusOptions()
+    {
+        return [
+            self::STATUS_NEW => 'Новый',
+            self::STATUS_CONFIRMED => 'Подтверждён',
+            self::STATUS_REJECTED => 'Отклонён',
+        ];
+    }
+
+    /**
+     * @return string status
+     */
+    public function getStatusName()
+    {
+        return self::getStatusOptions()[$this->status];
     }
 }

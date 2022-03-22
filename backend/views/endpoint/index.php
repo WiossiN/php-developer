@@ -1,15 +1,14 @@
 <?php
 
-use common\models\Event;
+use common\models\Endpoint;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\EventSearch */
+/* @var $searchModel common\models\search\EndpointSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Events';
+$this->title = 'Endpoints';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid">
@@ -19,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <?= Html::a('Create Event', ['create'], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('Create Endpoint', ['create'], ['class' => 'btn btn-success']) ?>
                         </div>
                     </div>
 
@@ -32,14 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filterModel' => $searchModel,
                         'columns' => [
                             'id',
-                            'goal',
-                            'cost',
+                            'name',
                             'endpoint',
                             [
-                                'attribute' => 'status',
-                                'filter' => Event::getStatusOptions(),
+                                'attribute' => 'type',
+                                'filter' => Endpoint::getTypeOptions(),
                                 'content' => function ($data) {
-                                    return $data->getStatusName();
+                                    return $data->getTypeName();
                                 },
                             ],
                             'created_at:datetime',
